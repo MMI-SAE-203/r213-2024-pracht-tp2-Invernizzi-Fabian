@@ -1,21 +1,21 @@
 <script setup lang =ts>
-import type { MaisonRecord } from '@/type'
+import type { MaisonResponse } from '@/pocketbase-types';
+import ImgPb from './ImgPb.vue';
 
-const props: MaisonRecord = defineProps<MaisonRecord>()
+const props = defineProps<MaisonResponse<any>>()
+console.log('props : ',{...props});
 </script>
 
 <template>
     <div
-  class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative rounded-lg bg-white border-[1.5px] border-indigo-100"
+  class="flex flex-col justify-start items-start flex-grow relative rounded-lg bg-white border-[1.5px] border-indigo-100"
 >
   <div class="self-stretch flex-grow-0 flex-shrink-0 h-[200px]">
     <div
-      class="w-[360px] h-[200px] absolute left-[-0.5px] top-[-0.5px] rounded-tl-lg rounded-tr-lg bg-gray-500"
+      class="w-[352px] h-[200px] absolute left-[-0.5px] top-[-0.5px] rounded-tl-lg rounded-tr-lg bg-gray-500"
     ></div>
-    <img
-      src="pexels-binyamin-mellish-106399-1.jpeg"
-      class="w-[360px] h-[235px] absolute left-[-0.5px] top-[-24.5px] object-cover"
-    />
+    
+    <ImgPb :record="props" :filename="images" class="w-[360px] h-[235px] absolute left-[-0.5px] top-[-24.5px] object-cover"/>
   </div>
   <div
     class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-4 px-5 py-7"
@@ -24,16 +24,14 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
       <div class="flex-grow-0 flex-shrink-0 w-[249px] h-[75px]">
         <div class="flex justify-start items-end w-[164.11px] absolute left-0 top-0 gap-0.5">
           <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-indigo-500">
-            $2,700
+            {{prix}} euros
           </p>
-          <p class="flex-grow-0 flex-shrink-0 w-[58px] h-8 text-base text-left text-gray-500">
-            /month
-          </p>
+          
         </div>
         <p
           class="w-[249px] absolute left-0 top-[43px] text-2xl font-semibold text-left text-gray-900"
         >
-          Beverly Springfield
+          {{nomMaison}}
         </p>
       </div>
       <svg
@@ -55,19 +53,19 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
         ></path>
       </svg>
     </div>
-    <p class="self-stretch flex-grow-0 flex-shrink-0 w-80 text-base text-left text-gray-500">
-      2821 Lake Sevilla, Palm Harbor, TX
+    <p class="self-stretch flex-grow-0 flex-shrink-0 w-[312px] text-base text-left text-gray-500">
+      {{ adresse }}
     </p>
     <svg
-      width="320"
+      width="312"
       height="2"
-      viewBox="0 0 320 2"
+      viewBox="0 0 312 2"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       class="self-stretch flex-grow-0 flex-shrink-0"
       preserveAspectRatio="xMidYMid meet"
     >
-      <line y1="1.25" x2="320" y2="1.25" stroke="#E0E7FF" stroke-width="1.5"></line>
+      <line y1="1.25" x2="312" y2="1.25" stroke="#E0E7FF" stroke-width="1.5"></line>
     </svg>
     <div class="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 gap-1.5">
       <div class="flex justify-start items-center flex-grow relative gap-2">
@@ -103,8 +101,8 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
           ></path>
         </svg>
         <div class="flex justify-start items-center flex-grow-0 flex-shrink-0 relative gap-1">
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">4</p>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">Beds</p>
+          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbChambres }}</p>
+          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">Chambre(s)</p>
         </div>
       </div>
       <div class="flex justify-center items-center flex-grow relative gap-2">
@@ -117,7 +115,7 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
           class="flex-grow-0 flex-shrink-0 w-5 h-5 relative"
           preserveAspectRatio="xMidYMid meet"
         >
-          <g clip-path="url(#clip0_34936_473)">
+          <g clip-path="url(#clip0_34947_1598)">
             <path
               d="M3.33333 10H16.6667C16.8877 10 17.0996 10.0878 17.2559 10.2441C17.4122 10.4004 17.5 10.6123 17.5 10.8333V13.3333C17.5 14.2174 17.1488 15.0652 16.5237 15.6904C15.8986 16.3155 15.0507 16.6667 14.1667 16.6667H5.83333C4.94928 16.6667 4.10143 16.3155 3.47631 15.6904C2.85119 15.0652 2.5 14.2174 2.5 13.3333V10.8333C2.5 10.6123 2.5878 10.4004 2.74408 10.2441C2.90036 10.0878 3.11232 10 3.33333 10V10Z"
               stroke="#6366F1"
@@ -133,14 +131,14 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
               stroke-linejoin="round"
             ></path>
             <path
-              d="M3.33325 17.5L4.16659 16.25"
+              d="M3.33337 17.5L4.16671 16.25"
               stroke="#6366F1"
               stroke-width="1.66667"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
             <path
-              d="M16.6666 17.5L15.8333 16.25"
+              d="M16.6667 17.5L15.8334 16.25"
               stroke="#6366F1"
               stroke-width="1.66667"
               stroke-linecap="round"
@@ -148,14 +146,14 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
             ></path>
           </g>
           <defs>
-            <clipPath id="clip0_34936_473">
+            <clipPath id="clip0_34947_1598">
               <rect width="20" height="20" fill="white"></rect>
             </clipPath>
           </defs>
         </svg>
         <div class="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-1">
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">2</p>
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">Bathrooms</p>
+          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbSdb }}</p>
+          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">Salle de bain</p>
         </div>
       </div>
       <div class="flex justify-end items-center flex-grow relative gap-2">
@@ -168,16 +166,16 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
           class="flex-grow-0 flex-shrink-0 w-5 h-5 relative"
           preserveAspectRatio="none"
         >
-          <g clip-path="url(#clip0_34936_483)">
+          <g clip-path="url(#clip0_34947_1608)">
             <path
-              d="M8.83148 15.5437L3.45631 10.1685C2.8479 9.56008 2.8479 8.43986 3.45631 7.83145L8.83148 2.45628C9.43989 1.84787 10.5601 1.84787 11.1685 2.45628L16.5437 7.83145C17.1521 8.43986 17.1521 9.56008 16.5437 10.1685L11.1685 15.5437C10.5601 16.1521 9.43989 16.1521 8.83148 15.5437V15.5437Z"
+              d="M8.83161 15.5437L3.45643 10.1685C2.84802 9.56008 2.84802 8.43986 3.45643 7.83145L8.83161 2.45628C9.44001 1.84787 10.5602 1.84787 11.1686 2.45628L16.5438 7.83145C17.1522 8.43986 17.1522 9.56008 16.5438 10.1685L11.1686 15.5437C10.5602 16.1521 9.44001 16.1521 8.83161 15.5437V15.5437Z"
               stroke="#6366F1"
               stroke-width="1.66667"
               stroke-linecap="round"
               stroke-linejoin="round"
             ></path>
             <path
-              d="M2 13.1716L6.36371 17.5353"
+              d="M1.99988 13.1716L6.36359 17.5353"
               stroke="#6366F1"
               stroke-width="1.66667"
               stroke-linecap="round"
@@ -192,13 +190,13 @@ const props: MaisonRecord = defineProps<MaisonRecord>()
             ></path>
           </g>
           <defs>
-            <clipPath id="clip0_34936_483">
+            <clipPath id="clip0_34947_1608">
               <rect width="20" height="20" fill="white"></rect>
             </clipPath>
           </defs>
         </svg>
         <div class="flex justify-end items-center flex-grow-0 flex-shrink-0 relative gap-1">
-          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">6x7.5</p>
+          <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ surface }}</p>
           <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">m²</p>
         </div>
       </div>

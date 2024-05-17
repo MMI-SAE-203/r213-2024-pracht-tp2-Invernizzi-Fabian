@@ -2,6 +2,8 @@
 import { onErrorCaptured } from 'vue'
 import { RouterLink, RouterView } from 'vue-router/auto'
 
+
+
 onErrorCaptured((err, instance, info) => {
   console.error('erreur : ', err, '\ninfo : ', info, '\ncomposant : ', instance)
   return true
@@ -9,7 +11,6 @@ onErrorCaptured((err, instance, info) => {
 </script>
 
 <template>
-  <MaisonCard v-bind="maisonsListe[0]" />
   <header>
     <nav>
       <ul>
