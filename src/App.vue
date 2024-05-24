@@ -11,11 +11,14 @@ onErrorCaptured((err, instance, info) => {
 </script>
 
 <template>
-  <header>
+  <header class="pb-12">
     <nav>
       <ul>
         <li>
           <RouterLink to="/" class="text-red-500 underline"> Accueil </RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/offres" class="text-red-500 underline"> Afficher offres </RouterLink>
         </li>
       </ul>
     </nav>

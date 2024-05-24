@@ -2,9 +2,9 @@
 <script setup lang="ts">
 
 import MaisonCard from '@/components/MaisonCard.vue';
-import { pb } from '@/backend';
+import { allMaisonsFavori, pb } from '@/backend';
 
-const maisonsListe = await pb.collection('maison').getFullList();
+const maisonsListe = await allMaisonsFavori()
  
 
 </script>
